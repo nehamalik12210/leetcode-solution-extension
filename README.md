@@ -51,6 +51,6 @@ Built for developers, competitive programmers, and students, ReCode helps optimi
 *	Advanced real-time collaboration and sharing
 *	AI-powered code suggestions and refactoring tools
 
-##📄 License
+## 📄 License
 
 This project is licensed under the MIT License. See LICENSE￼ for details.
