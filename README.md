@@ -27,7 +27,7 @@ Built for developers, competitive programmers, and students, ReCode helps optimi
 🛠 Installation
 	1.	Clone the repository:
 
-git clone https://github.com/<your-username>/recode.git
+git clone https://github.com/nehamalik12210/leetcode-solution-extension.git
 
 	2.	Open Chrome and navigate to chrome://extensions/.
 	3.	Enable Developer Mode.
@@ -53,10 +53,6 @@ git clone https://github.com/<your-username>/recode.git
 	•	GitHub PR reviewer integration
 	•	Advanced real-time collaboration and sharing
 	•	AI-powered code suggestions and refactoring tools
-
-🧑‍💻 Developer
-
-Vishnu Tripathi – Passionate about AI, coding, and developer tools.
 
 📄 License
 
