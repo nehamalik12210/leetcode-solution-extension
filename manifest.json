@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "ReCode",
+  "short_name": "ReCode",
+  "version": "1.0.0",
+  "author": "Vishnu Tripathi",
+  "description": "ReCode analyzes, optimizes, and explains code with smart insights.",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "scripting",
+    "storage",
+    "contextMenus",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+R",
+        "mac": "Command+Shift+R"
+      },
+      "description": "Open ReCode"
+    }
+  },
+  "action": {},
+  "side_panel": {
+    "default_path": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "privacy_practices": {
+    "single_purpose": "ReCode analyzes code snippets for complexity and provides intelligent code insights.",
+    "permissions": {
+      "activeTab": "Required to analyze the currently open code in the browser tab.",
+      "scripting": "Needed to inject scripts into pages for analyzing code snippets selected by the user.",
+      "storage": "Used to save user preferences and API keys securely within the extension.",
+      "contextMenus": "Allows adding a right-click menu option for quick code analysis."
+    },
+    "remote_code": "External APIs may be used to analyze code and generate insights."
+  }
+}

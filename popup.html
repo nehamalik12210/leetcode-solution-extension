@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ReCode</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header">
+      <div class="header-title-row">
+        <div class="title-block">
+          <h1 id="title">ReCode</h1>
+          <span class="subtitle">AI-Powered Code Analyzer</span>
+        </div>
+        <div class="header-actions">
+          <button id="settingsButton" class="header-icon-button" type="button" title="Settings">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </button>
+          <button id="themeToggle" class="header-icon-button" type="button" title="Toggle light/dark mode">
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="apiKeyMessage">Checking API key...</div>
+      <div id="apiKeyEditor" class="api-key-editor">
+        <input id="apiKeyInput" class="api-key-input" type="password" placeholder="Enter Gemini API Key" autocomplete="off">
+        <div class="api-key-actions">
+          <button id="toggleApiKeyEditor" class="secondary-button" type="button">Edit API Key</button>
+          <button id="saveApiKeyInline" class="secondary-button" type="button">Save Key</button>
+        </div>
+        <div id="apiKeyEditorStatus" class="api-key-editor-status"></div>
+      </div>
+    </div>
+
+    <div class="tagline" style="margin: 8px 0 12px 0; font-size: 12px; opacity: 0.8;">
+      Analyze • Optimize • Understand your code instantly
+    </div>
+    <div class="premium-badge" style="text-align:center; margin-bottom:10px; font-size:11px; opacity:0.7;">
+      🚀 Smart AI • Real-time Analysis • Developer Tool
+    </div>
+
+    <div class="button-group">
+      <button id="getComplexityOnly" class="action-button" disabled data-action="complexityOnly">Analyze Complexity</button>
+      <button id="explainComplexity" class="action-button" disabled data-action="explainComplexity">Deep Explain</button>
+      <button id="getCodeFeedback" class="action-button" disabled data-action="feedback">Code Review</button>
+      <button id="getExtraTestCases" class="action-button" disabled data-action="extraTestCases">Generate Tests</button>
+      <button id="getAlternateApproaches" class="action-button" disabled data-action="alternateApproaches">Better Approaches</button>
+      <button id="getHints" class="action-button" disabled data-action="hints">Smart Hints</button>
+    </div>
+
+    <div id="resultsContainer">
+      <div id="extractedCodeContainer" class="extracted-code-container">
+        <div class="extracted-code-header">
+          <span>Extracted Code</span>
+          <div class="extracted-code-actions">
+            <button id="toggleExtractedCode" class="secondary-button" type="button">Show Code</button>
+            <button id="refreshCodePreview" class="secondary-button" type="button">Refresh Preview</button>
+          </div>
+        </div>
+        <pre id="extractedCodePreview" class="extracted-code-preview is-collapsed">Loading extracted code from the live page...</pre>
+      </div>
+
+      <!-- Manual code input -->
+      <div id="manualCodeContainer" class="manual-code-container">
+        <div class="extracted-code-header">
+          <span>Manual Input</span>
+          <div class="extracted-code-actions">
+            <button id="toggleManualCode" class="secondary-button" type="button">Paste Code</button>
+            <button id="clearManualCode" class="secondary-button" type="button" style="display:none;">Clear</button>
+          </div>
+        </div>
+        <textarea id="manualCodeInput" class="manual-code-input is-collapsed" placeholder="Paste your code here if auto-extraction didn't work..."></textarea>
+      </div>
+
+      <!-- Analysis animation (hidden until action button clicked) -->
+      <div id="analysisAnimation" class="analysis-animation" style="display:none !important;">
+        <div class="anim-code-window">
+          <div class="anim-titlebar">
+            <span class="anim-dot red"></span>
+            <span class="anim-dot yellow"></span>
+            <span class="anim-dot green"></span>
+            <span class="anim-titlebar-text">analyzing code...</span>
+          </div>
+          <div id="animCodeBody" class="anim-code-body">
+            <!-- Lines injected dynamically from user's actual code -->
+            <div class="anim-scan-line"></div>
+          </div>
+        </div>
+        <div class="anim-status">
+          <div class="anim-spinner"></div>
+          <span id="analysisStatusText">Analyzing your code...</span>
+        </div>
+        <div class="anim-progress-bar">
+          <div class="anim-progress-fill"></div>
+        </div>
+      </div>
+
+      <div id="complexityDirectOutput" class="result-content" style="display: none;">
+        <div class="complexity-header-row">
+          <span class="complexity-section-title">Complexity Results</span>
+          <button id="copyComplexity" class="copy-button" type="button" title="Copy complexity">Copy</button>
+        </div>
+        <div class="complexity-item">
+          <span class="complexity-label">Time Complexity:</span>
+          <span id="timeComplexityValue" class="complexity-value time-value-color"></span>
+        </div>
+        <div class="complexity-item">
+          <span class="complexity-label">Space Complexity:</span>
+          <span id="spaceComplexityValue" class="complexity-value space-value-color"></span>
+        </div>
+        <div class="complexity-graphs">
+          <div class="complexity-graph-card">
+            <div class="graph-header">
+              <span class="graph-title">Time Complexity</span>
+              <span id="tcGraphLabel" class="graph-badge tc-badge"></span>
+            </div>
+            <canvas id="tcGraph" width="280" height="160"></canvas>
+          </div>
+          <div class="complexity-graph-card">
+            <div class="graph-header">
+              <span class="graph-title">Space Complexity</span>
+              <span id="scGraphLabel" class="graph-badge sc-badge"></span>
+            </div>
+            <canvas id="scGraph" width="280" height="160"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="results-wrapper">
+        <button id="copyResults" class="copy-button" type="button" title="Copy results" style="display: none;">Copy</button>
+        <div id="results" class="result-content typing-effect">
+          <p>Open any coding platform and let ReCode analyze your code instantly.</p>
+          <p>ReCode intelligently extracts and analyzes your code using AI + custom logic.</p>
+          <hr class="info-divider">
+          <p class="supported-sites">Optimized for <strong>LeetCode</strong>, <strong>GeeksforGeeks</strong>, <strong>CodeChef</strong> and modern coding platforms.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer id="attribution">
+      <span>ReCode • Built by <strong>Vishnu Tripathi</strong></span>
+     
+    </footer>
+
+  </div>
+
+  <script src="marked.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
