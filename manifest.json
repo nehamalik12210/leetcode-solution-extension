@@ -3,7 +3,7 @@
   "name": "ReCode",
   "short_name": "ReCode",
   "version": "1.0.0",
-  "author": "Vishnu Tripathi",
+  "author": "Neha",
   "description": "ReCode analyzes, optimizes, and explains code with smart insights.",
   "minimum_chrome_version": "120",
   "permissions": [
